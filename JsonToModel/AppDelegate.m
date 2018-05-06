@@ -23,8 +23,9 @@
                            @"str7":@[@"1",@"2",@"3"], @"str8":@[@{@"str":@"123"},@{@"str":@123},@{@"Number":@"32"}],
                            @"str10":@23, @"str11":@23.3,@"id":@"999"
                           };
-    
+    NSLog(@"%@",[NSDate new]);
     SubModel *model = [[SubModel alloc] initWithDictionary:dic];
+    NSLog(@"%@",[NSDate new]);
     NSLog(@"%@",model);
     return YES;
 }

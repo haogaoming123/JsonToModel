@@ -197,6 +197,7 @@ static NSArray * staticNOObjectTypes = nil;
         }
     }
 }
+
 // 将jsonvalue转换为model的类型：property_type：类型的type   jsonvalue：json的value   property_name的value
 -(void)changeJsonValueTypeToPropertyType:(NSString *)property_type with:(id)jsonValue with:(NSString *)property_name {
     Class changeClass = [BaseModel classFromeJsonValueClass:[jsonValue class]];
@@ -213,5 +214,9 @@ static NSArray * staticNOObjectTypes = nil;
         NSString *error = [NSString stringWithFormat:@"无法预估的类型转换：%@-->%@",property_type,changeClass];
         @throw [NSException exceptionWithName:@"解析错误" reason:error userInfo:nil];
     }
+}
+
+-(void)dealloc {
+    [classPropertys removeObjectForKey:NSStringFromClass([self class])];
 }
 @end

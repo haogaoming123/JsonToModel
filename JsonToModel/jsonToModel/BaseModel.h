@@ -12,4 +12,11 @@
 
 -(instancetype)initWithDictionary:(NSDictionary *)dic;
 
+/**
+ model中要替换json数据里的keys
+ *例如：+(NSDictionary *)keyMap {
+ *        return @{@"model_key":@"json_key"};
+ *     }
+ */
++(NSDictionary *)keyMap;
 @end

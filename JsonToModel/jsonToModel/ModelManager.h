@@ -14,6 +14,7 @@
 PROPERTYCOPY     NSString   *property_name;
 PROPERTYCOPY     NSString   *property_type;
 PROPERTYCOPY     NSString   *property_subType;
-PROPERTYASSIGN   BOOL       isMutable;
-
+PROPERTYASSIGN   BOOL       isMutable;      //是否为mutble类型
+PROPERTYASSIGN   BOOL       isReplace;      //是否为replace类型
+PROPERTYCOPY     NSString   *replaceByKey;  //json中被替换的key
 @end

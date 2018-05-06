@@ -9,10 +9,18 @@
 #import "SubModel.h"
 
 @implementation myClass
-
++ (NSDictionary *)keyMap {
+    return @{@"number":@"Number"};
+}
 @end
 
 @implementation SubModel
 
+/**
+ * 要替换的key
+ */
++ (NSDictionary *)keyMap {
+    return @{@"ID":@"id"};
+}
 @end
 

@@ -34,16 +34,30 @@
     return [NSNumber numberWithFloat:[number floatValue]];
 }
 
+-(NSNumber *)floatBYNSString:(NSString *)string {
+    if (string.length > 0) {
+        return [NSNumber numberWithFloat:[string intValue]];
+    }
+    return [NSNumber numberWithFloat:0.0];
+}
+
 -(NSNumber *)intBYNSNumber:(NSNumber *)number {
     return [NSNumber numberWithInt:[number intValue]];
+}
+
+-(NSNumber *)intBYNSString:(NSString *)string {
+    if (string.length > 0) {
+        return [NSNumber numberWithInt:[string intValue]];
+    }
+    return [NSNumber numberWithInt:0];
 }
 
 -(NSNumber *)doubleBYNSNumber:(NSNumber *)number {
     return [NSNumber numberWithDouble:[number doubleValue]];
 }
 
--(NSInteger)NSIntegerBYNSNumber:(NSNumber *)number {
-    return [number integerValue];
+-(NSNumber *)NSIntegerBYNSNumber:(NSNumber *)number {
+    return number;
 }
 
 -(NSNumber *)BOOLBYNSNumber:(NSNumber *)number {

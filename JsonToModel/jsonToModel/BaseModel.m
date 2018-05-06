@@ -49,6 +49,10 @@ static NSArray * staticNOObjectTypes = nil;
     return self;
 }
 
+#pragma mark - keyMap methods：替换关键字声明
++(NSDictionary *)keyMap {
+    return nil;
+}
 
 #pragma mark - setUp methods：解析model的属性
 //解析model的属性
@@ -61,6 +65,10 @@ static NSArray * staticNOObjectTypes = nil;
     NSMutableDictionary *mutDic = [NSMutableDictionary dictionary];
     //循环遍历子类、父类property
     while (class != [BaseModel class]) {
+        //解析要替换的keys
+        NSDictionary *replaceKeyMap = [class keyMap];
+        NSArray *replaceKeyMap_keys = [replaceKeyMap allKeys];
+        //解析class中的propertys
         unsigned int count = 0;
         objc_property_t *propertys = class_copyPropertyList(class, &count);
         if (propertys != NULL && count != 0) {
@@ -74,6 +82,10 @@ static NSArray * staticNOObjectTypes = nil;
                 const char *name = property_getName(property);
                 NSString *propertyName = [NSString stringWithUTF8String:name];
                 manager.property_name = propertyName;
+                if ([replaceKeyMap_keys containsObject:propertyName]) {
+                    manager.isReplace = YES;
+                    manager.replaceByKey = replaceKeyMap[propertyName];
+                }
                 
                 //分析property_type
                 unsigned int attributsCount = 0;
@@ -135,15 +147,23 @@ static NSArray * staticNOObjectTypes = nil;
 -(void)propertyWithDictionary:(NSDictionary *)dic {
     NSDictionary *propertyDic = [classPropertys objectForKey:NSStringFromClass([self class])];
     NSArray *keysArray = [propertyDic allKeys];
+    //赋值
     for (int i = 0; i<keysArray.count; i++) {
         NSString *key = keysArray[i];
+        //propertyDic的value值
+        ModelManager *manager = propertyDic[key];
+        
         //dic的value值
-        id jsonValue = dic[key];
+        id jsonValue = nil;
+        if (manager.isReplace) {
+            jsonValue = dic[manager.replaceByKey];
+        }else {
+            jsonValue = dic[key];
+        }
         if (jsonValue == NULL && jsonValue == nil) {
             continue;
         }
-        //propertyDic的value值
-        ModelManager *manager = propertyDic[key];
+        
         if ([NSClassFromString(manager.property_type) isSubclassOfClass:[BaseModel class]]) {
             id objc = [[NSClassFromString(manager.property_type) alloc] initWithDictionary:dic[key]];
             [self setValue:objc forKey:key];

@@ -11,11 +11,13 @@
 @protocol myClass @end
 
 @interface myClass: BaseModel
-@property (nonatomic,copy) NSString *str;
+@property (nonatomic,  copy) NSString *str;
+@property (nonatomic,assign) float    number;
 @end
 
 @interface SubModel : BaseModel
 
+@property (nonatomic,assign) int ID;
 @property (nonatomic,  copy) NSString *str1;     //@"NSString"
 @property (nonatomic,  copy) NSString *str2;     //@"NSString"
 @property (nonatomic,assign) NSInteger str3;     //q

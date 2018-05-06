@@ -19,9 +19,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    NSDictionary *dic = @{ @"str1":@"123", @"str2":@"456", @"str3":@"222", @"str5":@"1",
-                           @"str7":@[@"1",@"2",@"3"], @"str8":@[@{@"str":@"123"},@{@"str":@123}],
-                           @"str10":@23, @"str11":@23.3
+    NSDictionary *dic = @{ @"str1":@"123", @"str2":@"456", @"str3":@222, @"str5":@"1",
+                           @"str7":@[@"1",@"2",@"3"], @"str8":@[@{@"str":@"123"},@{@"str":@123},@{@"Number":@"32"}],
+                           @"str10":@23, @"str11":@23.3,@"id":@"999"
                           };
     
     SubModel *model = [[SubModel alloc] initWithDictionary:dic];
